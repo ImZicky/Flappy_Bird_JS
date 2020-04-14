@@ -20,7 +20,7 @@ $(document).ready(function(){
         
 
         // Rotacionamento do passaro para o chão
-        $('body').keyup(function(e){
+        $('body').keydown(function(e){
             if(e.keyCode == 32){
                 if(rotacaoDeQueda <= -90)
                 {
@@ -57,7 +57,7 @@ $(document).ready(function(){
         setInterval(function(e){
             milesimosDeJogo = milesimosDeJogo + 1;
 
-            $('body').keyup(function(e){
+            $('body').keydown(function(e){
                 if(e.keyCode == 32){
                     clicou = true
                 }
