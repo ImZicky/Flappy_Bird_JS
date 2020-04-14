@@ -25,18 +25,23 @@ $(document).ready(function(){
         var posicaoPassaro = 0;
         var fps = 1;
         var pesoPassaro = 1; // Aumenta 1 == facil || 2 == normal || 3 == dificil
+        var pesoPassaroBatidaDeAsa = 2
         var clicou = false;
         var milesimosDeJogo = 0;
         var milesimosDeJogoDpsDoClick = 0;
+        var gameOverTop = -15;
+        var gameOverDown = 490;
 
-        setInterval(function(){
+        setInterval(function(e){
             milesimosDeJogo = milesimosDeJogo + 1;
 
-            $('#tela').click(function(){
-                clicou = true
+            $('body').keyup(function(e){
+                if(e.keyCode == 32){
+                    clicou = true
+                }
             });
 
-            if(posicaoPassaro > 440 || posicaoPassaro < -40)
+            if(posicaoPassaro > gameOverDown || posicaoPassaro < gameOverTop) // Bordas de GAMEOVER
             {
                 alert("perdeu");
             }
@@ -50,7 +55,7 @@ $(document).ready(function(){
                 console.log(milesimosDeJogoDpsDoClick);
                 if(segundosDeJogoDpsDoClick <= 0.06)
                 {
-                    posicaoPassaro = posicaoPassaro - 2;
+                    posicaoPassaro = posicaoPassaro - pesoPassaroBatidaDeAsa; // Quando bate as asas ele fica mais leve
                     $('#passaro').css("margin-top", posicaoPassaro);
                 }
                 else
@@ -61,7 +66,7 @@ $(document).ready(function(){
 
             }else
             {
-                posicaoPassaro = posicaoPassaro + 1;
+                posicaoPassaro = posicaoPassaro + pesoPassaro;
                 $('#passaro').css("margin-top", posicaoPassaro);    
                 clicou = false;
 
