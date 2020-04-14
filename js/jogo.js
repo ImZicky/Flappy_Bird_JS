@@ -1,20 +1,42 @@
 $(document).ready(function(){
 
-    var imgPassaro = 1
-
+    var imgPassaro = 1;
+    var tempoBateAsas = 150;
+    var rotacaoDeQueda = 1;
     setInterval(function(){
 
+        // Batida de asas e rotacionamento
         if(imgPassaro == 1){
             $('#passaro').attr("src","images/bird/passaro-fecha-asas.png");
             imgPassaro = 0;
+            rotacaoDeQueda = rotacaoDeQueda + 10;
         }
         else
         {
             $('#passaro').attr("src","images/bird/passaro-bate-asas.png");
             imgPassaro = 1;
+            rotacaoDeQueda = rotacaoDeQueda + 10;
         }
-           
-       }, 150
+        
+
+        // Rotacionamento do passaro para o chão
+        $('body').keyup(function(e){
+            if(e.keyCode == 32){
+                if(rotacaoDeQueda <= -90)
+                {
+                    rotacaoDeQueda = 0;
+                }
+                else
+                {
+                    rotacaoDeQueda = rotacaoDeQueda - 10;
+                }
+            }
+        });
+        $('#passaro').css('transform','rotate('+rotacaoDeQueda+'deg)');
+    
+
+        
+       }, tempoBateAsas
     );
 
 
