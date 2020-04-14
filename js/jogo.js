@@ -42,8 +42,6 @@ $(document).ready(function(){
 
     function Inicia()
     {
-        console.log("INICIOU A GRAVIDADE");
-
         var posicaoPassaro = 0;
         var fps = 1;
         var pesoPassaro = 1; // Aumenta 1 == facil || 2 == normal || 3 == dificil
@@ -65,7 +63,7 @@ $(document).ready(function(){
 
             if(posicaoPassaro > gameOverDown || posicaoPassaro < gameOverTop) // Bordas de GAMEOVER
             {
-                alert("perdeu");
+                alert("GAME OVER");
             }
 
             if(clicou)
