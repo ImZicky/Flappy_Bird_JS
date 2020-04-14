@@ -24,7 +24,7 @@ $(document).ready(function(){
             if(e.keyCode == 32){
                 if(rotacaoDeQueda <= -90)
                 {
-                    rotacaoDeQueda = 0;
+                    rotacaoDeQueda = -90;
                 }
                 else
                 {
