@@ -40,7 +40,85 @@ $(document).ready(function(){
     );
 
 
-    function Inicia()
+    function IniciaJogo()
+    {
+        var posicaoPassaro = 0;
+        var fps = 1;
+        var pesoPassaro = 1; // Aumenta 1 == facil || 2 == normal || 3 == dificil
+        var pesoPassaroBatidaDeAsa = 2
+        var clicou = false;
+        var milesimosDeJogo = 0;
+        var milesimosDeJogoDpsDoClick = 0;
+        var gameOverTop = -15;
+        var gameOverDown = 490;
+        var gameover = false;
+        var r = Math.ceil(Math.random()*2);
+        var audioBateAsas = new Audio('audios/voa'+r+'.wav');
+
+        setInterval(function(e){
+            if (gameover != true)
+            {
+                // Bloco de jogo
+                milesimosDeJogo = milesimosDeJogo + 1;
+
+                $('body').keydown(function(e){
+                    if(e.keyCode == 32){
+                        clicou = true
+                        audioBateAsas.play();
+                    }
+                });
+
+                if(posicaoPassaro > gameOverDown || posicaoPassaro < gameOverTop) // Bordas de GAMEOVER
+                {
+                    gameover = true;
+                }
+
+                if(clicou)
+                {
+                    //Calculo do intervalo de tempo para 1 segundo de voo do passaro
+                    milesimosDeJogoDpsDoClick = milesimosDeJogoDpsDoClick + 1;
+                    var segundosDeJogoDpsDoClick = milesimosDeJogoDpsDoClick / 1000;
+
+                    if(segundosDeJogoDpsDoClick <= 0.06)
+                    {
+                        posicaoPassaro = posicaoPassaro - pesoPassaroBatidaDeAsa; // Quando bate as asas ele fica mais PESADO
+                        $('#passaro').css("margin-top", posicaoPassaro);
+                    }
+                    else
+                    {
+                        clicou = false;
+                        milesimosDeJogoDpsDoClick = 0;
+                    }
+
+                }
+                else
+                {
+                    posicaoPassaro = posicaoPassaro + pesoPassaro;
+                    $('#passaro').css("margin-top", posicaoPassaro);    
+                    clicou = false;
+
+                }
+
+
+            }
+            else
+            {
+                // Bloco de Game Over
+                alert(" --- Game Over --- ");
+            }
+
+
+
+            // Movimentação do background
+            $('#tela').css('background','images/bird/bg.png');
+
+
+        }, fps);
+    
+    }
+    
+
+    function ApresentaJogo()
     {
         var posicaoPassaro = 0;
         var fps = 1;
@@ -52,18 +130,18 @@ $(document).ready(function(){
         var gameOverTop = -15;
         var gameOverDown = 490;
 
+
         setInterval(function(e){
+
             milesimosDeJogo = milesimosDeJogo + 1;
 
-            $('body').keydown(function(e){
-                if(e.keyCode == 32){
-                    clicou = true
-                }
-            });
-
-            if(posicaoPassaro > gameOverDown || posicaoPassaro < gameOverTop) // Bordas de GAMEOVER
+            if(posicaoPassaro > gameOverDown - 20) // Bordas de GAMEOVER
             {
-                alert("GAME OVER");
+                clicou = true
+            }
+            if(posicaoPassaro < gameOverTop-20) // Bordas de GAMEOVER
+            {
+                clicou = false
             }
 
             if(clicou)
@@ -72,10 +150,9 @@ $(document).ready(function(){
                 milesimosDeJogoDpsDoClick = milesimosDeJogoDpsDoClick + 1;
                 var segundosDeJogoDpsDoClick = milesimosDeJogoDpsDoClick / 1000;
 
-                console.log(milesimosDeJogoDpsDoClick);
                 if(segundosDeJogoDpsDoClick <= 0.06)
                 {
-                    posicaoPassaro = posicaoPassaro - pesoPassaroBatidaDeAsa; // Quando bate as asas ele fica mais leve
+                    posicaoPassaro = posicaoPassaro - pesoPassaroBatidaDeAsa; // Quando bate as asas ele fica mais PESADO
                     $('#passaro').css("margin-top", posicaoPassaro);
                 }
                 else
@@ -93,6 +170,8 @@ $(document).ready(function(){
             }
 
 
+            // Movimentação do background
+            $('#tela').css('background','images/bird/bg.png');
 
 
 
@@ -100,12 +179,16 @@ $(document).ready(function(){
         }, fps);
 
     }
-    
 
 
 
 
-    Inicia(true);
+
+    // ApresentaJogo();
+
+    // $('#btnLinkoStarto').click(function(){
+        IniciaJogo();
+    // });
 
 
         
