@@ -1,0 +1,14 @@
+
+#tela
+{
+    background-image: url("../images/bg.png");
+    background-size: cover;
+    width: 800px;
+    height: 600px;
+}
+
+
+#tela:hover
+{
+    cursor: pointer;
+}
