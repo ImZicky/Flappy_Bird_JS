@@ -48,9 +48,9 @@ $(document).ready(function(){
                 var segundosDeJogoDpsDoClick = milesimosDeJogoDpsDoClick / 1000;
 
                 console.log(milesimosDeJogoDpsDoClick);
-                if(segundosDeJogoDpsDoClick <= 0.07)
+                if(segundosDeJogoDpsDoClick <= 0.06)
                 {
-                    posicaoPassaro = posicaoPassaro - 1;
+                    posicaoPassaro = posicaoPassaro - 2;
                     $('#passaro').css("margin-top", posicaoPassaro);
                 }
                 else
