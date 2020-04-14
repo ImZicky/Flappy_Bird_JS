@@ -53,7 +53,9 @@ $(document).ready(function(){
         var gameOverDown = 490;
         var gameover = false;
         var r = Math.ceil(Math.random()*2);
+        var rgo = Math.ceil(Math.random()*4);
         var audioBateAsas = new Audio('audios/voa'+r+'.wav');
+        var audioGameOver = new Audio('audios/gameover'+rgo+'.wav');
 
         setInterval(function(e){
             if (gameover != true)
@@ -104,6 +106,7 @@ $(document).ready(function(){
             else
             {
                 // Bloco de Game Over
+                audioGameOver.play();
                 alert(" --- Game Over --- ");
             }
 
