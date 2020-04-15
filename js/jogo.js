@@ -56,16 +56,19 @@ $(document).ready(function(){
         var rgo = Math.ceil(Math.random()*4);
         var audioBateAsas = new Audio('audios/voa'+r+'.wav');
         var audioGameOver = new Audio('audios/gameover'+rgo+'.wav');
+        var audioMusicaGame = new Audio('audios/musicas/viva-la-vida.wav');
 
         setInterval(function(e){
             if (gameover != true)
             {
+
                 // Bloco de jogo
                 milesimosDeJogo = milesimosDeJogo + 1;
 
                 $('body').keydown(function(e){
                     if(e.keyCode == 32){
                         clicou = true
+                        audioMusicaGame.play();
                         audioBateAsas.play();
                     }
                 });
